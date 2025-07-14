@@ -1,25 +1,25 @@
-﻿#include <windows.h>
+﻿#include <cstdint>
+#include <windows.h>
 #include <vfw.h>
 #pragma comment(lib, "vfw32.lib")
 #include "output2.h"
-#include <fstream>
 
 namespace apn
 {
 	//
-	// この関数は指定されたデータを出力ストリームに書き込みます。
+	// 指定されたデータを出力ファイルに書き込みます。
 	//
-	inline void write(auto& stream, const void* data, size_t size)
+	inline void write(HANDLE file, const void* data, size_t size)
 	{
-		stream.write((const char*)data, size);
+		::WriteFile(file, data, (DWORD)size, nullptr, nullptr);
 	}
 
 	//
-	// この関数は指定されたデータを出力ストリームに書き込みます。
+	// 指定されたデータを出力ファイルに書き込みます。
 	//
-	inline void write(auto& stream, const auto& data)
+	inline void write(HANDLE file, const auto& data)
 	{
-		return write(stream, &data, sizeof(data));
+		return write(file, &data, sizeof(data));
 	}
 
 	//
@@ -27,8 +27,10 @@ namespace apn
 	//
 	bool output_wav(OUTPUT_INFO* oip, WORD format_tag, WORD bytes_per_sample)
 	{
-		// 出力ストリームを開きます。
-		std::ofstream file(oip->savefile, std::ios::binary);
+		// 出力ファイルを開きます。
+		auto file = ::CreateFileW(oip->savefile, GENERIC_WRITE, 0,
+			nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+		if (file == INVALID_HANDLE_VALUE) return false;
 
 		// wavフォーマットです。
 		WAVEFORMATEX wf {};
@@ -83,6 +85,8 @@ namespace apn
 			// 1秒分の音声信号を書き込みます。
 			write(file, data, readed * wf.nBlockAlign);
 		}
+
+		::CloseHandle(file);
 
 		return true;
 	}

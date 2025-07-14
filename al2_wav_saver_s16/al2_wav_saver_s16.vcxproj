@@ -93,6 +93,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <EntryPointSymbol>DllMain</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(TargetPath)" "C:\ProgramData\aviutl2\Plugin\$(TargetName).auo2"</Command>
@@ -112,6 +113,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <EntryPointSymbol>DllMain</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(TargetPath)" "C:\ProgramData\aviutl2\Plugin\$(TargetName).auo2"</Command>
@@ -129,6 +131,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <EntryPointSymbol>DllMain</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(TargetPath)" "C:\ProgramData\aviutl2\Plugin\$(TargetName).auo2"</Command>
@@ -148,6 +151,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <EntryPointSymbol>DllMain</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(TargetPath)" "C:\ProgramData\aviutl2\Plugin\$(TargetName).auo2"</Command>
